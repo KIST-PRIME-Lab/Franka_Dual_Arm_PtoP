@@ -32,6 +32,24 @@
 
 ### 터미널 1: 로봇 제어 프로그램
 
+
+Terminal 1. 
+sudo su 
+shm 
+
+Terminal 2. 
+nd -> kistar bridge node turn on 
+
+
+Useful commands:
+rs -> ros turn on 
+
+ethernet check.
+
+enp1s0f0 -> Kistar_hand
+enp1s0f3 -> Isaac_pc
+realtech -> Franka
+
 ```bash
 sudo su
 cd /home/prime/KISTAR_Hand_RTOS-master/Franka_Dual_Arm_PtoP/R_Franka_KISTAR_Hand/build/test
