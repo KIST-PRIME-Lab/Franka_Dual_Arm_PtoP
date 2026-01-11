@@ -24,68 +24,76 @@ class Metaclass_FrankaArmTarget(type):
     _DESTROY_ROS_MESSAGE = None
     _TYPE_SUPPORT = None
 
-    __constants = {
-    }
+    __constants = {}
 
     @classmethod
     def __import_type_support__(cls):
         try:
             from rosidl_generator_py import import_type_support
-            module = import_type_support('kistar_hand_ros2')
+
+            module = import_type_support("kistar_hand_ros2")
         except ImportError:
             import logging
             import traceback
-            logger = logging.getLogger(
-                'kistar_hand_ros2.msg.FrankaArmTarget')
+
+            logger = logging.getLogger("kistar_hand_ros2.msg.FrankaArmTarget")
             logger.debug(
-                'Failed to import needed modules for type support:\n' +
-                traceback.format_exc())
+                "Failed to import needed modules for type support:\n"
+                + traceback.format_exc()
+            )
         else:
-            cls._CREATE_ROS_MESSAGE = module.create_ros_message_msg__msg__franka_arm_target
+            cls._CREATE_ROS_MESSAGE = (
+                module.create_ros_message_msg__msg__franka_arm_target
+            )
             cls._CONVERT_FROM_PY = module.convert_from_py_msg__msg__franka_arm_target
             cls._CONVERT_TO_PY = module.convert_to_py_msg__msg__franka_arm_target
             cls._TYPE_SUPPORT = module.type_support_msg__msg__franka_arm_target
-            cls._DESTROY_ROS_MESSAGE = module.destroy_ros_message_msg__msg__franka_arm_target
+            cls._DESTROY_ROS_MESSAGE = (
+                module.destroy_ros_message_msg__msg__franka_arm_target
+            )
 
     @classmethod
     def __prepare__(cls, name, bases, **kwargs):
         # list constant names here so that they appear in the help text of
         # the message class under "Data and other attributes defined here:"
         # as well as populate each message instance
-        return {
-        }
+        return {}
 
 
 class FrankaArmTarget(metaclass=Metaclass_FrankaArmTarget):
     """Message class 'FrankaArmTarget'."""
 
     __slots__ = [
-        '_joint_targets',
-        '_arm_id',
+        "_joint_targets",
+        "_arm_id",
     ]
 
     _fields_and_field_types = {
-        'joint_targets': 'double[7]',
-        'arm_id': 'uint8',
+        "joint_targets": "double[7]",
+        "arm_id": "uint8",
     }
 
     SLOT_TYPES = (
-        rosidl_parser.definition.Array(rosidl_parser.definition.BasicType('double'), 7),  # noqa: E501
-        rosidl_parser.definition.BasicType('uint8'),  # noqa: E501
+        rosidl_parser.definition.Array(
+            rosidl_parser.definition.BasicType("double"), 7
+        ),  # noqa: E501
+        rosidl_parser.definition.BasicType("uint8"),  # noqa: E501
     )
 
     def __init__(self, **kwargs):
-        assert all('_' + key in self.__slots__ for key in kwargs.keys()), \
-            'Invalid arguments passed to constructor: %s' % \
-            ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
-        if 'joint_targets' not in kwargs:
+        assert all(
+            "_" + key in self.__slots__ for key in kwargs.keys()
+        ), "Invalid arguments passed to constructor: %s" % ", ".join(
+            sorted(k for k in kwargs.keys() if "_" + k not in self.__slots__)
+        )
+        if "joint_targets" not in kwargs:
             self.joint_targets = numpy.zeros(7, dtype=numpy.float64)
         else:
-            self.joint_targets = kwargs.get('joint_targets')
-        self.arm_id = kwargs.get('arm_id', int())
+            self.joint_targets = kwargs.get("joint_targets")
+        self.arm_id = kwargs.get("arm_id", int())
 
     def __repr__(self):
-        typename = self.__class__.__module__.split('.')
+        typename = self.__class__.__module__.split(".")
         typename.pop()
         typename.append(self.__class__.__name__)
         args = []
@@ -96,19 +104,31 @@ class FrankaArmTarget(metaclass=Metaclass_FrankaArmTarget):
             # in them, and "normal" sequences for everything else.  If it is
             # a type that we store in an array, strip off the 'array' portion.
             if (
-                isinstance(t, rosidl_parser.definition.AbstractSequence) and
-                isinstance(t.value_type, rosidl_parser.definition.BasicType) and
-                t.value_type.typename in ['float', 'double', 'int8', 'uint8', 'int16', 'uint16', 'int32', 'uint32', 'int64', 'uint64']
+                isinstance(t, rosidl_parser.definition.AbstractSequence)
+                and isinstance(t.value_type, rosidl_parser.definition.BasicType)
+                and t.value_type.typename
+                in [
+                    "float",
+                    "double",
+                    "int8",
+                    "uint8",
+                    "int16",
+                    "uint16",
+                    "int32",
+                    "uint32",
+                    "int64",
+                    "uint64",
+                ]
             ):
                 if len(field) == 0:
-                    fieldstr = '[]'
+                    fieldstr = "[]"
                 else:
-                    assert fieldstr.startswith('array(')
+                    assert fieldstr.startswith("array(")
                     prefix = "array('X', "
-                    suffix = ')'
-                    fieldstr = fieldstr[len(prefix):-len(suffix)]
-            args.append(s[1:] + '=' + fieldstr)
-        return '%s(%s)' % ('.'.join(typename), ', '.join(args))
+                    suffix = ")"
+                    fieldstr = fieldstr[len(prefix) : -len(suffix)]
+            args.append(s[1:] + "=" + fieldstr)
+        return "%s(%s)" % (".".join(typename), ", ".join(args))
 
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
@@ -122,6 +142,7 @@ class FrankaArmTarget(metaclass=Metaclass_FrankaArmTarget):
     @classmethod
     def get_fields_and_field_types(cls):
         from copy import copy
+
         return copy(cls._fields_and_field_types)
 
     @builtins.property
@@ -132,10 +153,12 @@ class FrankaArmTarget(metaclass=Metaclass_FrankaArmTarget):
     @joint_targets.setter
     def joint_targets(self, value):
         if isinstance(value, numpy.ndarray):
-            assert value.dtype == numpy.float64, \
-                "The 'joint_targets' numpy.ndarray() must have the dtype of 'numpy.float64'"
-            assert value.size == 7, \
-                "The 'joint_targets' numpy.ndarray() must have a size of 7"
+            assert (
+                value.dtype == numpy.float64
+            ), "The 'joint_targets' numpy.ndarray() must have the dtype of 'numpy.float64'"
+            assert (
+                value.size == 7
+            ), "The 'joint_targets' numpy.ndarray() must have a size of 7"
             self._joint_targets = value
             return
         if __debug__:
@@ -143,16 +166,23 @@ class FrankaArmTarget(metaclass=Metaclass_FrankaArmTarget):
             from collections.abc import Set
             from collections import UserList
             from collections import UserString
-            assert \
-                ((isinstance(value, Sequence) or
-                  isinstance(value, Set) or
-                  isinstance(value, UserList)) and
-                 not isinstance(value, str) and
-                 not isinstance(value, UserString) and
-                 len(value) == 7 and
-                 all(isinstance(v, float) for v in value) and
-                 all(not (val < -1.7976931348623157e+308 or val > 1.7976931348623157e+308) or math.isinf(val) for val in value)), \
-                "The 'joint_targets' field must be a set or sequence with length 7 and each value of type 'float' and each double in [-179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.000000, 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.000000]"
+
+            assert (
+                (
+                    isinstance(value, Sequence)
+                    or isinstance(value, Set)
+                    or isinstance(value, UserList)
+                )
+                and not isinstance(value, str)
+                and not isinstance(value, UserString)
+                and len(value) == 7
+                and all(isinstance(v, float) for v in value)
+                and all(
+                    not (val < -1.7976931348623157e308 or val > 1.7976931348623157e308)
+                    or math.isinf(val)
+                    for val in value
+                )
+            ), "The 'joint_targets' field must be a set or sequence with length 7 and each value of type 'float' and each double in [-179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.000000, 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.000000]"
         self._joint_targets = numpy.array(value, dtype=numpy.float64)
 
     @builtins.property
@@ -163,9 +193,8 @@ class FrankaArmTarget(metaclass=Metaclass_FrankaArmTarget):
     @arm_id.setter
     def arm_id(self, value):
         if __debug__:
-            assert \
-                isinstance(value, int), \
-                "The 'arm_id' field must be of type 'int'"
-            assert value >= 0 and value < 256, \
-                "The 'arm_id' field must be an unsigned integer in [0, 255]"
+            assert isinstance(value, int), "The 'arm_id' field must be of type 'int'"
+            assert (
+                value >= 0 and value < 256
+            ), "The 'arm_id' field must be an unsigned integer in [0, 255]"
         self._arm_id = value

@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-# 🤖 Franka Robot + ROS2 시스템 가이드
-
-## 📌 시스템 구조
+# 🤖 Franka Robot + ROS2 Guide
+## 📌 System Architecture
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
@@ -26,29 +24,34 @@
 
 ---
 
-# Part 1: Robot PC 실행 가이드
+# Part 1: Robot PC Quick Start
 
-## 🚀 실행 순서 (3개 터미널)
+* 🚀 Quick Start with Terminal! 
 
-### 터미널 1: 로봇 제어 프로그램
+## 1. ethernet check
+enp1s0f0: Kistar_hand
+enp1s0f3: Isaac_pc
+realtech: Franka
 
+### Minimal commands to get started quickly.
 
-Terminal 1. 
+Terminal 1. Turn on Robot Shared Memeory
+```shell
 sudo su 
 shm 
+```
+Terminal 2. Turn on ROS2 bridge node 
+```shell
+nd  
+```
 
-Terminal 2. 
-nd -> kistar bridge node turn on 
+(Optional) Useful commands: ros configuration alias
+```shell
+rs  
+```
 
-
-Useful commands:
-rs -> ros turn on 
-
-ethernet check.
-
-enp1s0f0 -> Kistar_hand
-enp1s0f3 -> Isaac_pc
-realtech -> Franka
+# Part 2: Manual Turn on the Robot Guide
+### Terminal 1: Shared Memory + Robot Control
 
 ```bash
 sudo su
@@ -56,7 +59,7 @@ cd /home/prime/KISTAR_Hand_RTOS-master/Franka_Dual_Arm_PtoP/R_Franka_KISTAR_Hand
 ./R_Franka_KISTAR_Hand
 ```
 
-**예상 출력:**
+**Expected Results:**
 ```
 ✅ Shared Memory 연결 성공
 🔗 Connecting to Franka...
@@ -66,9 +69,8 @@ cd /home/prime/KISTAR_Hand_RTOS-master/Franka_Dual_Arm_PtoP/R_Franka_KISTAR_Hand
 
 ---
 
-### 터미널 2: ROS2 브리지
+### Terminal 2: ROS2 Bridge Node
 
-ros2 환경설정
 ```bash
 source /opt/ros/humble/setup.bash
 source /home/prime/KISTAR_Hand_RTOS-master/Franka_Dual_Arm_PtoP/R_Franka_KISTAR_Hand/install/setup.bash
@@ -79,8 +81,6 @@ export ROS_LOCALHOST_ONLY=0
 ros2 topic echo /franka/arm_target/right
 ```
 
-# 그 다음 명령어 실행
-ros2 topic echo /franka/arm_target/right
 
 ```bash
 cd /home/prime/KISTAR_Hand_RTOS-master/Franka_Dual_Arm_PtoP/R_Franka_KISTAR_Hand
@@ -92,7 +92,7 @@ export ROS_LOCALHOST_ONLY=0
 ros2 run kistar_hand_ros2 shm_ros2_bridge
 ```
 
-**예상 출력:**
+**Expected Results:**
 ```
 ✅ Shared Memory 연결 성공
 🚀 ROS2-SHM Bridge 노드 시작됨
@@ -100,7 +100,7 @@ ros2 run kistar_hand_ros2 shm_ros2_bridge
 
 ---
 
-### 터미널 3: Target 전송 테스트
+### Terminal 3: Target Sender Script
 
 ```bash
 cd /home/prime/KISTAR_Hand_RTOS-master/Franka_Dual_Arm_PtoP/R_Franka_KISTAR_Hand
@@ -116,9 +116,7 @@ python3 send_arm_target.py
 ros2 run rqt_graph rqt_graph
 ```
 
-
-
-**사용법:**
+**Usage:**
 ```
 🚀 Arm Target Sender 시작!
 ==================================================
@@ -343,7 +341,4 @@ colcon build
 
 *작성일: 2026-01-08*
 
-=======
-# Franka_Dual_Arm_PtoP
-Franka and KISTAR_Hand controller setting with Ros2 and SHM
->>>>>>> cfd07a4f19c98e1707e4049e0999ed613e3c0043
+**Contributor:** Jaesung Lee, Chanyoung Ahn

@@ -40,7 +40,9 @@ def main():
         input("Press Enter to continue...")
 
         # Start joint position control with external control loop
-        active_control = robot.start_joint_position_control(ControllerMode.CartesianImpedance)
+        active_control = robot.start_joint_position_control(
+            ControllerMode.CartesianImpedance
+        )
 
         initial_position = [0.0] * 7
         time_elapsed = 0.0
@@ -56,7 +58,9 @@ def main():
 
             # On first iteration, capture initial position
             if time_elapsed <= duration.to_sec():
-                initial_position = robot_state.q_d if hasattr(robot_state, "q_d") else robot_state.q
+                initial_position = (
+                    robot_state.q_d if hasattr(robot_state, "q_d") else robot_state.q
+                )
 
             # Calculate delta angle using the same formula as in C++ example
             delta_angle = np.pi / 8.0 * (1 - np.cos(np.pi / 2.5 * time_elapsed))

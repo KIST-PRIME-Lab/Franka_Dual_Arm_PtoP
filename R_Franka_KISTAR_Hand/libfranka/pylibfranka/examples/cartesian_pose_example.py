@@ -40,7 +40,9 @@ def main():
         input("Press Enter to continue...")
 
         # Start cartesian pose control with external control loop
-        active_control = robot.start_cartesian_pose_control(ControllerMode.JointImpedance)
+        active_control = robot.start_cartesian_pose_control(
+            ControllerMode.JointImpedance
+        )
 
         time_elapsed = 0.0
         motion_finished = False

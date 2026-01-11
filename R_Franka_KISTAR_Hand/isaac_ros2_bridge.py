@@ -280,38 +280,37 @@ class IsaacRos2Bridge(Node):
         if self.arm_state_R is not None:
             # 현재 위치를 그대로 목표로 (안전)aac ROS2 Bridge - 테스트용 노드
 
-shm_ros2_bridge와 통신하여 데이터 송수신 테스트
-나중에 Isaac Sim PC에서 실행할 노드의 템플릿
+# shm_ros2_bridge와 통신하여 데이터 송수신 테스트
+# 나중에 Isaac Sim PC에서 실행할 노드의 템플릿
 
-구조:
-  franka, hand <-> shm <-> /shm_ros2_bridge <-> /isaac_ros2_bridge (이 노드)
+# 구조:
+#   franka, hand <-> shm <-> /shm_ros2_bridge <-> /isaac_ros2_bridge (이 노드)
 
-역할:
-    rclpy.init(args=args)
+# 역할:
+#     rclpy.init(args=args)
     
-    node = IsaacRos2Bridge()
+#     node = IsaacRos2Bridge()
     
-    print()
-    print('=' * 60)
-    print('  Isaac ROS2 Bridge - 테스트 노드')
-    print('=' * 60)
-    print()
-    print('  명령어:')
-    print('    Ctrl+C : 종료')
-    print()
-    print('  rqt_graph에서 연결 확인 가능')
-    print('=' * 60)
-    print()
+#     print()
+#     print('=' * 60)
+#     print('  Isaac ROS2 Bridge - 테스트 노드')
+#     print('=' * 60)
+#     print()
+#     print('  명령어:')
+#     print('    Ctrl+C : 종료')
+#     print()
+#     print('  rqt_graph에서 연결 확인 가능')
+#     print('=' * 60)
+#     print()
     
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        node.get_logger().info('👋 종료 요청됨')
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
+#     try:
+#         rclpy.spin(node)
+#     except KeyboardInterrupt:
+#         node.get_logger().info('👋 종료 요청됨')
+#     finally:
+#         node.destroy_node()
+#         rclpy.shutdown()
 
 
-if __name__ == '__main__':
-    main()
-
+# if __name__ == '__main__':
+#     main()

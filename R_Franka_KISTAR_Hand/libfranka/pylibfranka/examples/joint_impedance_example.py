@@ -147,7 +147,10 @@ def main():
                 # Compute joint-space impedance control
                 tau_task = np.zeros(7)
                 for i in range(7):
-                    tau_task[i] = -joint_stiffness[i] * position_error[i] - joint_damping[i] * dq[i]
+                    tau_task[i] = (
+                        -joint_stiffness[i] * position_error[i]
+                        - joint_damping[i] * dq[i]
+                    )
 
                 # Add coriolis compensation
                 tau_d = tau_task + coriolis

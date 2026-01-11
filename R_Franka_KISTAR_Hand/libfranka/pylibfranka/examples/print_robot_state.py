@@ -44,12 +44,16 @@ def print_robot_state(state):
 
     # External torques and forces
     try:
-        print(f"  External Joint Torques: {np.round(state.tau_ext_hat_filtered, 4).tolist()}")
+        print(
+            f"  External Joint Torques: {np.round(state.tau_ext_hat_filtered, 4).tolist()}"
+        )
     except (AttributeError, TypeError):
         print("  External Joint Torques: <not available>")
 
     try:
-        print(f"  External Wrench (base frame): {np.round(state.O_F_ext_hat_K, 4).tolist()}")
+        print(
+            f"  External Wrench (base frame): {np.round(state.O_F_ext_hat_K, 4).tolist()}"
+        )
     except (AttributeError, TypeError):
         print("  External Wrench (base frame): <not available>")
 
@@ -62,7 +66,10 @@ def main():
         "--rate", type=float, default=0.5, help="Rate at which to print state (in Hz)"
     )
     parser.add_argument(
-        "--count", type=int, default=1, help="Number of state readings to print (0 for continuous)"
+        "--count",
+        type=int,
+        default=1,
+        help="Number of state readings to print (0 for continuous)",
     )
     args = parser.parse_args()
 
